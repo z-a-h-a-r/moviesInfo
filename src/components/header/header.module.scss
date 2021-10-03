@@ -1,7 +1,6 @@
 .header {
 	height: 70px;
-	margin-bottom: 100px;
-	background-color: rgba(238, 238, 238, 0.6);
+	background: #161616;
 
 	.inner {
 		height: 70px;
@@ -22,7 +21,7 @@
 	}
 
 	.link {
-		color: black;
+		color: rgb(255, 255, 255);
 	}
 
 	@media (max-width: 768px) {
@@ -36,11 +35,6 @@
 	@media (max-width: 992px) {
 		.menu {
 			width: 500px;
-		}
-	}
-	@media (max-width: 385px) {
-		.searchWrap {
-			width: 100%;
 		}
 	}
 }

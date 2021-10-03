@@ -1,0 +1,28 @@
+.form {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20fr 1fr;
+
+	.input {
+		height: 35px;
+		background: #161616;
+		border-radius: 7px 0 0 7px;
+		padding: 0 3px;
+
+		&:active {
+			background: #161616;
+		}
+	}
+
+	.button {
+		border-radius: 0 7px 7px 0;
+		background: #202020;
+		padding: 0 5px;
+		position: relative;
+
+		& img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+}

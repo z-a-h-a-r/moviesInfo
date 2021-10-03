@@ -18,6 +18,7 @@ const Footer = () => {
 							<li>
 								<a
 									href="https://github.com/z-a-h-a-r/weatherSite"
+									className="link"
 									target="_blank"
 								>
 									Project Code
@@ -26,7 +27,7 @@ const Footer = () => {
 							<li>
 								<a
 									href="https://github.com/z-a-h-a-r"
-									className={styles.menu__link}
+									className="link"
 									target="_blank"
 								>
 									My GitHub
@@ -40,7 +41,7 @@ const Footer = () => {
 							<li>
 								<a
 									href="https://openweathermap.org/"
-									className={styles.menu__link}
+									className="link"
 									target="_blank"
 								>
 									Weather API
@@ -49,7 +50,7 @@ const Footer = () => {
 							<li>
 								<a
 									href="https://yandex.ru/dev/maps/geocoder/"
-									className={styles.menu__link}
+									className="link"
 									target="_blank"
 								>
 									Geocoder API
@@ -64,18 +65,9 @@ const Footer = () => {
 							<li>
 								<a
 									target="_blank"
-									href="https://www.instagram.com/z_a_h_a_r_74/"
+									href="https://t.me/z_a_h_a_r_74/"
+									className="link"
 								>
-									instagram
-								</a>
-							</li>
-							<li>
-								<a target="_blank" href="https://vk.com/idzaharip">
-									vkontakte
-								</a>
-							</li>
-							<li>
-								<a target="_blank" href="https://t.me/z_a_h_a_r_74/">
 									telegram
 								</a>
 							</li>

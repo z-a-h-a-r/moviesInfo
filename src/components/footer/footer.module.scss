@@ -1,8 +1,8 @@
 .footer {
 	width: 100%;
-	margin-top: 150px;
-	background-color: rgba(238, 238, 238, 0.6);
+	background: #161616;
 	padding: 30px 0;
+	margin-top: 150px;
 
 	@media (max-width: 768px) {
 		margin-top: 80px;
@@ -41,13 +41,6 @@
 					margin-bottom: 5px;
 					@media (max-width: 463px) {
 						text-align: center;
-					}
-
-					& a {
-						color: black;
-						&:hover {
-							color: rgb(61, 61, 61);
-						}
 					}
 				}
 			}

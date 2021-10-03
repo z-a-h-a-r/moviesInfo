@@ -11,7 +11,7 @@ import store from './stores/appStore'
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter basename={'/weatherSite/'}>
+		<BrowserRouter basename={'/movies/'}>
 			<App />
 		</BrowserRouter>
 	</Provider>,

@@ -28,28 +28,69 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_SERACH_DATA: {
 			if (action.payload.type === 'movie') {
-				return {
-					...state,
-					moviesPageCurrentData: {
-						...state.moviesPageCurrentData,
-						search: { ...action.payload.data },
-					},
+				if (action.payload.isAdd === true) {
+					return {
+						...state,
+						moviesPageCurrentData: {
+							...state.moviesPageCurrentData,
+							search: {
+								results: [
+									...state.moviesPageCurrentData.search.results,
+									...action.payload.data.results,
+								],
+							},
+						},
+					}
+				} else {
+					return {
+						...state,
+						moviesPageCurrentData: {
+							...state.moviesPageCurrentData,
+							search: { ...action.payload.data },
+						},
+					}
 				}
 			} else if (action.payload.type === 'tv') {
-				return {
-					...state,
-					tvShowsPageCurrentData: {
-						...state.tvShowsPageCurrentData,
-						search: { ...action.payload.data },
-					},
+				if (action.payload.isAdd === true) {
+					return {
+						...state,
+						tvShowsPageCurrentData: {
+							...state.tvShowsPageCurrentData,
+							search: {
+								...state.tvShowsPageCurrentData.search,
+								...action.payload.data,
+							},
+						},
+					}
+				} else {
+					return {
+						...state,
+						tvShowsPageCurrentData: {
+							...state.tvShowsPageCurrentData,
+							search: { ...action.payload.data },
+						},
+					}
 				}
 			} else if (action.payload.type === 'person') {
-				return {
-					...state,
-					peoplePageCurrentData: {
-						...state.peoplePageCurrentData,
-						search: action.payload.data,
-					},
+				if (action.payload.isAdd === true) {
+					return {
+						...state,
+						peoplePageCurrentData: {
+							...state.peoplePageCurrentData,
+							search: {
+								...state.peoplePageCurrentData.search,
+								...action.payload.data,
+							},
+						},
+					}
+				} else {
+					return {
+						...state,
+						peoplePageCurrentData: {
+							...state.peoplePageCurrentData,
+							search: action.payload.data,
+						},
+					}
 				}
 			} else {
 				return state
@@ -116,12 +157,12 @@ export const getDetailsSuccess = payload => ({
 // ====================================================
 // Thunks
 
-export const search = (resolve, query, type, page, year) => {
+export const search = (resolve, query, type, page, isAdd, year) => {
 	return async dispatch => {
 		API.search(query, type, page, year).then(data => {
 			resolve
-				? resolve(dispatch(searchSuccess({ data, type })))
-				: dispatch(searchSuccess({ data, type }))
+				? resolve(dispatch(searchSuccess({ data, type, isAdd })))
+				: dispatch(searchSuccess({ data, type, isAdd }))
 		})
 	}
 }

@@ -1,10 +1,25 @@
 // ========================================
 // link fonts
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;900&display=swap');
 
 // ========================================
 
 * {
-	font-family: 'Roboto Mono', monospace;
+	font-family: 'Source Code Pro', monospace;
 	transition: 0.4s;
+	color: #fff;
+}
+
+body {
+	background: #0f0f0f;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+
+	.container {
+		flex-grow: 1;
+	}
 }
