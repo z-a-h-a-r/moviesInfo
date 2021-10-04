@@ -5,7 +5,7 @@ import './styles/style.scss'
 import './styles/commonStyles.scss'
 import Loading from './components/loading/loading'
 import { Route } from 'react-router-dom'
-import { useHistory } from 'react-router'
+import { Redirect, useHistory } from 'react-router'
 import React, { useEffect } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -13,9 +13,7 @@ import { useDispatch } from 'react-redux'
 import { initializeApp } from './reducers/appReducer'
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
-import Movies from './pages/movies/movies'
-import People from './pages/people/people'
-import TvShows from './pages/tvShows/tvShows'
+import ContentPage from './pages/contentPage/contentPage'
 
 // ====================================================
 // Component
@@ -40,9 +38,18 @@ const App = props => {
 		<div className="body">
 			<Header />
 			<div className="container">
-				<Route path="/movies/:popular?" render={() => <Movies />} />
-				<Route path="/tvShows" render={() => <TvShows />} />
-				<Route path="/people" render={() => <People />} />
+				<Route
+					path="/movies/:popular?"
+					render={() => <ContentPage contentType="movies" key={1} />}
+				/>
+				<Route
+					path="/tvShows/:popular?"
+					render={() => <ContentPage contentType="tvShows" key={2} />}
+				/>
+				<Route
+					path="/people/:popular?"
+					render={() => <ContentPage contentType="people" key={3} />}
+				/>
 			</div>
 			<Footer />
 		</div>

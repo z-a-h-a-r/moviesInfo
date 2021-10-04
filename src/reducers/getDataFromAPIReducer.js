@@ -15,9 +15,9 @@ const SET_DETAILS_DATA = 'SET_DETAILS_DATA'
 // Initial state
 
 let initialState = {
-	moviesPageCurrentData: { pageType: 'movie', search: {}, trending: {} },
-	tvShowsPageCurrentData: { pageType: 'tv', search: {}, trending: {} },
-	peoplePageCurrentData: { pageType: 'people', search: {}, trending: {} },
+	moviesPageCurrentData: { search: {}, trending: {} },
+	tvShowsPageCurrentData: { search: {}, trending: {} },
+	peoplePageCurrentData: { search: {}, trending: {} },
 	detailsPageCurrentData: {},
 }
 
@@ -34,6 +34,7 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 						moviesPageCurrentData: {
 							...state.moviesPageCurrentData,
 							search: {
+								...action.payload.data,
 								results: [
 									...state.moviesPageCurrentData.search.results,
 									...action.payload.data.results,
@@ -46,7 +47,7 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 						...state,
 						moviesPageCurrentData: {
 							...state.moviesPageCurrentData,
-							search: { ...action.payload.data },
+							search: action.payload.data,
 						},
 					}
 				}
@@ -57,8 +58,11 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 						tvShowsPageCurrentData: {
 							...state.tvShowsPageCurrentData,
 							search: {
-								...state.tvShowsPageCurrentData.search,
 								...action.payload.data,
+								results: [
+									...state.tvShowsPageCurrentData.search.results,
+									...action.payload.data.results,
+								],
 							},
 						},
 					}
@@ -78,8 +82,11 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 						peoplePageCurrentData: {
 							...state.peoplePageCurrentData,
 							search: {
-								...state.peoplePageCurrentData.search,
 								...action.payload.data,
+								results: [
+									...state.peoplePageCurrentData.search.results,
+									...action.payload.data.results,
+								],
 							},
 						},
 					}
@@ -92,40 +99,87 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 						},
 					}
 				}
-			} else {
-				return state
 			}
 		}
 
 		case SET_TRENDING_DATA: {
 			if (action.payload.type === 'movie') {
-				return {
-					...state,
-					moviesPageCurrentData: {
-						...state.moviesPageCurrentData,
-						trending: { ...action.payload.data },
-					},
+				if (action.payload.isAdd === true) {
+					return {
+						...state,
+						moviesPageCurrentData: {
+							...state.moviesPageCurrentData,
+							trending: {
+								...action.payload.data,
+								results: [
+									...state.moviesPageCurrentData.trending.results,
+									...action.payload.data.results,
+								],
+							},
+						},
+					}
+				} else {
+					return {
+						...state,
+						moviesPageCurrentData: {
+							...state.moviesPageCurrentData,
+							trending: { ...action.payload.data },
+						},
+					}
 				}
 			} else if (action.payload.type === 'tv') {
-				return {
-					...state,
-					tvShowsPageCurrentData: {
-						...state.tvShowsPageCurrentData,
-						trending: { ...action.payload.data },
-					},
+				if (action.payload.isAdd === true) {
+					return {
+						...state,
+						tvShowsPageCurrentData: {
+							...state.tvShowsPageCurrentData,
+							trending: {
+								...action.payload.data,
+								results: [
+									...state.tvShowsPageCurrentData.trending.results,
+									...action.payload.data.results,
+								],
+							},
+						},
+					}
+				} else {
+					return {
+						...state,
+						tvShowsPageCurrentData: {
+							...state.tvShowsPageCurrentData,
+							trending: { ...action.payload.data },
+						},
+					}
 				}
 			} else if (action.payload.type === 'person') {
-				return {
-					...state,
-					peoplePageCurrentData: {
-						...state.peoplePageCurrentData,
-						trending: action.payload.data,
-					},
+				if (action.payload.isAdd === true) {
+					return {
+						...state,
+						peoplePageCurrentData: {
+							...state.peoplePageCurrentData,
+							trending: {
+								...action.payload.data,
+								results: [
+									...state.peoplePageCurrentData.trending.results,
+									...action.payload.data.results,
+								],
+							},
+						},
+					}
+				} else {
+					return {
+						...state,
+						peoplePageCurrentData: {
+							...state.peoplePageCurrentData,
+							trending: action.payload.data,
+						},
+					}
 				}
 			} else {
 				return state
 			}
 		}
+
 		case SET_DETAILS_DATA: {
 			return {
 				...state,
@@ -173,6 +227,14 @@ export const getTrending = (resolve, type, time_window) => {
 			resolve
 				? resolve(dispatch(getTrendingSuccess({ data, type })))
 				: dispatch(getTrendingSuccess({ data, type }))
+		})
+	}
+}
+
+export const getPopular = (type, page, isAdd = false) => {
+	return async dispatch => {
+		API.getPopular(type, page).then(data => {
+			dispatch(getTrendingSuccess({ data, type, isAdd }))
 		})
 	}
 }

@@ -35,4 +35,9 @@ export const API = {
 			.get(`${api.base}/${type}/${id}?api_key=${api.key}`)
 			.then(result => result.data)
 	},
+	getPopular: (type = '', page) => {
+		return axios
+			.get(`${api.base}/${type}/popular?page=${page}&api_key=${api.key}`)
+			.then(result => result.data)
+	},
 }
