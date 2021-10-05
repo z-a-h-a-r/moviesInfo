@@ -4,12 +4,12 @@ import styles from './noSearchData.module.scss'
 import React from 'react'
 import Card from '../card/card'
 import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 // ====================================================
 // Component
 
-const NoSearchData = () => {
+const NoSearchData = props => {
 	// ====================================================
 	// state
 
@@ -41,6 +41,8 @@ const NoSearchData = () => {
 									key={index}
 									imgUrl={item.poster_path}
 									title={item.title}
+									type={'movies'}
+									id={item.id}
 								/>
 							)
 						} else {
@@ -64,6 +66,8 @@ const NoSearchData = () => {
 									key={index}
 									imgUrl={peopleTrending[index].profile_path}
 									title={peopleTrending[index].name}
+									type={'people'}
+									id={item.id}
 								/>
 							)
 						} else {
@@ -87,6 +91,8 @@ const NoSearchData = () => {
 									key={index}
 									imgUrl={tvShowsTrending[index].poster_path}
 									title={tvShowsTrending[index].name}
+									type={'tvShows'}
+									id={item.id}
 								/>
 							)
 						} else {

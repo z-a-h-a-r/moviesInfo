@@ -10,6 +10,7 @@ import { API } from '../api/api'
 const SET_SERACH_DATA = 'SET_SERACH_DATA'
 const SET_TRENDING_DATA = 'SET_TRENDING_DATA'
 const SET_DETAILS_DATA = 'SET_DETAILS_DATA'
+const CLEAN_DETAILS_DATA = 'CLEAN_DETAILS_DATA'
 
 // ====================================================
 // Initial state
@@ -18,7 +19,11 @@ let initialState = {
 	moviesPageCurrentData: { search: {}, trending: {} },
 	tvShowsPageCurrentData: { search: {}, trending: {} },
 	peoplePageCurrentData: { search: {}, trending: {} },
-	detailsPageCurrentData: {},
+	detailsPageCurrentData: {
+		production_companies: [],
+		genres: [],
+		production_countries: [],
+	},
 }
 
 // ====================================================
@@ -186,6 +191,12 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 				detailsPageCurrentData: action.payload,
 			}
 		}
+		case CLEAN_DETAILS_DATA: {
+			return {
+				...state,
+				detailsPageCurrentData: {},
+			}
+		}
 
 		default:
 			return state
@@ -207,6 +218,10 @@ export const getDetailsSuccess = payload => ({
 	type: SET_DETAILS_DATA,
 	payload,
 })
+export const cleanDetailsPage = payload => ({
+	type: CLEAN_DETAILS_DATA,
+	payload,
+})
 
 // ====================================================
 // Thunks
@@ -221,20 +236,12 @@ export const search = (resolve, query, type, page, isAdd, year) => {
 	}
 }
 
-export const getTrending = (resolve, type, time_window) => {
-	return async dispatch => {
-		API.getTrending(type, time_window).then(data => {
-			resolve
-				? resolve(dispatch(getTrendingSuccess({ data, type })))
-				: dispatch(getTrendingSuccess({ data, type }))
-		})
-	}
-}
-
-export const getPopular = (type, page, isAdd = false) => {
+export const getPopular = (type, page, isAdd = false, resolve) => {
 	return async dispatch => {
 		API.getPopular(type, page).then(data => {
-			dispatch(getTrendingSuccess({ data, type, isAdd }))
+			resolve
+				? resolve(dispatch(getTrendingSuccess({ data, type, isAdd })))
+				: dispatch(getTrendingSuccess({ data, type, isAdd }))
 		})
 	}
 }

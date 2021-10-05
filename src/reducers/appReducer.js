@@ -2,7 +2,7 @@
 // IMPORTS
 // Main
 
-import { getDetails, getTrending } from './getDataFromAPIReducer'
+import { getDetails, getPopular, getTrending } from './getDataFromAPIReducer'
 
 // ====================================================
 // Types
@@ -45,16 +45,16 @@ export const initializeSuccess = payload => ({
 export const initializeApp = () => {
 	return async dispatch => {
 		new Promise((resolve, reject) => {
-			dispatch(getTrending(resolve, 'movie'))
+			dispatch(getPopular('movie', 1, false, resolve))
 		})
 			.then(() => {
 				return new Promise((resolve, reject) => {
-					dispatch(getTrending(resolve, 'tv'))
+					dispatch(getPopular('tv', 1, false, resolve))
 				})
 			})
 			.then(() => {
 				return new Promise((resolve, reject) => {
-					dispatch(getTrending(resolve, 'person'))
+					dispatch(getPopular('person', 1, false, resolve))
 				})
 			})
 			.then(() => {

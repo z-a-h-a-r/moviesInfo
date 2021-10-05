@@ -40,20 +40,11 @@ const Footer = () => {
 						<ul>
 							<li>
 								<a
-									href="https://openweathermap.org/"
+									href="https://www.themoviedb.org/settings/api"
 									className="link"
 									target="_blank"
 								>
-									Weather API
-								</a>
-							</li>
-							<li>
-								<a
-									href="https://yandex.ru/dev/maps/geocoder/"
-									className="link"
-									target="_blank"
-								>
-									Geocoder API
+									theMovieDb API
 								</a>
 							</li>
 						</ul>

@@ -25,11 +25,6 @@ export const API = {
 			)
 			.then(result => result.data)
 	},
-	getTrending: (type = '', time_window = 'day') => {
-		return axios
-			.get(`${api.base}/trending/${type}/${time_window}?api_key=${api.key}`)
-			.then(result => result.data)
-	},
 	getDetails: (type = '', id = '') => {
 		return axios
 			.get(`${api.base}/${type}/${id}?api_key=${api.key}`)

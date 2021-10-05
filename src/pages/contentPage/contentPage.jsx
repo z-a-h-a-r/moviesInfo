@@ -20,7 +20,7 @@ const ContentPage = props => {
 	const history = useHistory()
 	let parsedUrl = queryString.parse(history.location.search.substr(1))
 	let pageCounter = useRef(1)
-	let pageTypeForAPI = useRef(1)
+	let pageTypeForAPI = useRef()
 
 	// ====================================================
 	// state
@@ -94,7 +94,7 @@ const ContentPage = props => {
 				search(
 					null,
 					parsedUrl.query,
-					props.contentType,
+					pageTypeForAPI.current,
 					pageCounter.current,
 					true
 				)
@@ -105,7 +105,7 @@ const ContentPage = props => {
 	const loadMoreTrending = () => {
 		if (trendingData.total_pages > pageCounter.current) {
 			pageCounter.current += 1
-			dispatch(getPopular(props.contentType, pageCounter.current, true))
+			dispatch(getPopular(pageTypeForAPI.current, pageCounter.current, true))
 		}
 	}
 
@@ -146,6 +146,8 @@ const ContentPage = props => {
 											? item.name
 											: item.title
 									}
+									type={props.contentType}
+									id={item.id}
 								/>
 							)
 						})}
@@ -184,6 +186,8 @@ const ContentPage = props => {
 													? item.name
 													: item.title
 											}
+											type={props.contentType}
+											id={item.id}
 										/>
 									)
 								})}

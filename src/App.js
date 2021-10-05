@@ -14,13 +14,13 @@ import { initializeApp } from './reducers/appReducer'
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
 import ContentPage from './pages/contentPage/contentPage'
+import Details from './pages/details/details'
 
 // ====================================================
 // Component
 
 const App = props => {
 	// Variables
-	const history = useHistory()
 	const dispatch = useDispatch()
 
 	// ====================================================
@@ -50,6 +50,7 @@ const App = props => {
 					path="/people/:popular?"
 					render={() => <ContentPage contentType="people" key={3} />}
 				/>
+				<Route path="/details" render={() => <Details />} />
 			</div>
 			<Footer />
 		</div>
