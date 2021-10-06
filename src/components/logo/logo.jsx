@@ -1,6 +1,7 @@
 // ====================================================
 // IMPORTS
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import styles from './logo.module.scss'
 
 // ====================================================
@@ -9,15 +10,11 @@ import styles from './logo.module.scss'
 const Logo = props => {
 	// JSX
 	return (
-		<div
-			className={
-				props.displayNone ? [styles.media, styles.body].join(' ') : styles.body
-			}
-		>
-			<span>span</span>
-			<span>span</span>
-			<span>span</span>
-		</div>
+		<NavLink to={'/'}>
+			<div className={styles.body}>
+				<span>movies info</span>
+			</div>
+		</NavLink>
 	)
 }
 

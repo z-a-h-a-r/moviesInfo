@@ -1,6 +1,6 @@
 // ====================================================
 // IMPORTS
-import styles from './contentPage.module.scss'
+import styles from './content.module.scss'
 import React, { useEffect, useRef, useState } from 'react'
 import Search from '../../components/search/search'
 import NoSearchData from '../../components/noSearchData/noSearchData'
@@ -15,7 +15,7 @@ import { getPopular } from '../../reducers/getDataFromAPIReducer'
 // ====================================================
 // Component
 
-const ContentPage = props => {
+const Content = props => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	let parsedUrl = queryString.parse(history.location.search.substr(1))
@@ -48,7 +48,7 @@ const ContentPage = props => {
 	// Side Effects
 
 	useEffect(() => {
-		if (!searchData.results) {
+		if (!searchData.results && parsedUrl.query && parsedUrl.query.length) {
 			dispatch(search(null, parsedUrl.query, props.contentType))
 		}
 
@@ -118,7 +118,6 @@ const ContentPage = props => {
 			<div className={styles.bar}>
 				<Search type={props.contentType} callback={callback} />
 				<div></div>
-
 				<NavLink
 					to={`/${props.contentType}/popular`}
 					className={styles.popularButton}
@@ -211,4 +210,4 @@ const ContentPage = props => {
 // ====================================================
 // Exports
 
-export default ContentPage
+export default Content

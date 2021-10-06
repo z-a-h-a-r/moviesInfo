@@ -23,8 +23,6 @@ const Details = props => {
 	// Side Effects
 
 	useEffect(() => {
-		// dispatch(cleanDetailsPage())
-
 		if (parsedUrl.type === 'movies') {
 			pageTypeForAPI.current = 'movie'
 		} else if (parsedUrl.type === 'tvShows') {

@@ -28,7 +28,7 @@ const NoSearchData = props => {
 	return (
 		<div className={styles.body}>
 			<div className={styles.group}>
-				<NavLink to="" className={styles.groupTitle}>
+				<NavLink to={'/movies/'} className={styles.groupTitle}>
 					Most popular movies
 				</NavLink>
 				<div className={styles.rowWrap}>
@@ -53,14 +53,14 @@ const NoSearchData = props => {
 			</div>
 
 			<div className={styles.group}>
-				<NavLink to="" className={styles.groupTitle}>
+				<NavLink to={'/people/'} className={styles.groupTitle}>
 					Most popular actors
 				</NavLink>
 				<div className={styles.rowWrap}>
 					{peopleTrending.map(item => {
 						let index = peopleTrending.indexOf(item)
 
-						if (index < 5) {
+						if (index < 6) {
 							return (
 								<Card
 									key={index}
@@ -78,7 +78,7 @@ const NoSearchData = props => {
 			</div>
 
 			<div className={styles.group}>
-				<NavLink to="" className={styles.groupTitle}>
+				<NavLink to={'/tvShows/'} className={styles.groupTitle}>
 					Most popular tv shows
 				</NavLink>
 				<div className={styles.rowWrap}>

@@ -1,20 +1,17 @@
 .body {
-	width: 55px;
-	height: 55px;
-	padding: 5px;
+	padding: 7px 15px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	background: black;
 
 	& span {
-		font-size: 10px;
+		font-size: 13px;
 		user-select: none;
 		color: #fff;
 	}
-}
-.media {
-	@media (max-width: 385px) {
+
+	@media (max-width: 500px) {
 		display: none;
 	}
 }
