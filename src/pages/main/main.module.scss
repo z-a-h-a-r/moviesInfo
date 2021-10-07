@@ -1,7 +1,13 @@
 .body {
 	.cardWrapper {
 		margin-top: 70px;
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(80px, 1fr));
+		column-gap: 30px;
+
+		@media (max-width: 343px) {
+			grid-template-columns: repeat(1, minmax(80px, 1fr));
+			row-gap: 30px;
+		}
 	}
 }

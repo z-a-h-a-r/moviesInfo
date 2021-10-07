@@ -9,6 +9,8 @@ import {
 } from '../../reducers/getDataFromAPIReducer'
 import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
+import CompanyCard from '../content/companyCard/companyCard'
+import InfoCard from '../content/infoCard/infoCard'
 
 // ====================================================
 // Component
@@ -50,15 +52,16 @@ const Details = props => {
 
 	return (
 		<div className={styles.body}>
-			<section className={styles.firstSection}>
-				<img
-					src={`https://image.tmdb.org/t/p/w500${
-						data.poster_path ? data.poster_path : data.profile_path
-					}`}
-					alt=""
-					className={styles.poster}
-				/>
-				<div className={styles.firstSectionInfo}>
+			<img
+				src={`https://image.tmdb.org/t/p/w500${
+					data.poster_path ? data.poster_path : data.profile_path
+				}`}
+				alt=""
+				className={styles.poster}
+			/>
+
+			<div>
+				<div className={styles.heading}>
 					<p className={styles.title}>
 						{pageTypeForAPI.current === 'movie'
 							? data.title
@@ -67,96 +70,74 @@ const Details = props => {
 							: data.name}
 					</p>
 					<p className={styles.tagline}>{data.tagline}</p>
+				</div>
 
-					<div className={styles.infoCard}>
-						{pageTypeForAPI.current === 'movie' ||
-						pageTypeForAPI.current === 'tv' ? (
-							<>
-								<p className={styles.info}>
-									Genres: {data.genres.map(item => item.name + '. ')}
-								</p>
-								<p className={styles.info}>Vote average: {data.vote_average}</p>
-								<p className={styles.info}>Status: {data.status}</p>
-								<p className={styles.info}>
-									{pageTypeForAPI.current === 'movie'
-										? `Runtime: ${data.runtime} min`
-										: pageTypeForAPI.current === 'tv'
-										? `Episode runtime: ${data.episode_run_time} min`
-										: ''}
-								</p>
-								<p className={styles.info}>Release date: {data.release_date}</p>
-								<p className={styles.info}>
-									Original language: {data.original_language}
-								</p>
-								<p className={styles.info}>
-									Genres:{' '}
-									{data.production_countries.map(item => item.name + '. ')}
-								</p>
-								{data.budget ? (
-									<p className={styles.info}>Budget: {data.budget}$</p>
-								) : (
-									''
-								)}
-
-								{data.homepage.string !== 0 ? (
-									<div className={styles.info}>
-										homepage:{' '}
-										<a
-											href={data.homepage}
-											className={styles.link}
-											target="_blank"
-										>
-											{data.homepage}
-										</a>
-									</div>
-								) : (
-									''
-								)}
-								<p className={styles.overview}>Overview: {data.overview}</p>
-							</>
-						) : (
-							<p>
-								<p className={styles.info}>Birthday: {data.birthday}</p>
-								{data.deathday ? (
-									<p className={styles.info}>Birthday: {data.deathday}</p>
-								) : (
-									''
-								)}
-								<p className={styles.info}>
-									Known for department: {data.known_for_department}
-								</p>
-								<p className={styles.info}>Popularity: {data.popularity}</p>
-								<p className={styles.info}>
-									Place of birthday: {data.place_of_birth}
-								</p>
-								<p className={styles.overview}>Biography: {data.biography}</p>
-							</p>
+				{(pageTypeForAPI.current === 'movie' ||
+					pageTypeForAPI.current === 'tv') && (
+					<div className={styles.info}>
+						<InfoCard
+							content={`Genres: ${data.genres.map(item => item.name + '. ')}`}
+						/>
+						<InfoCard content={`Vote average: ${data.vote_average}`} />
+						<InfoCard content={`Status: ${data.status}`} />
+						<InfoCard
+							content={
+								pageTypeForAPI.current === 'movie'
+									? `Runtime: ${data.runtime} min`
+									: pageTypeForAPI.current === 'tv'
+									? `Episode runtime: ${data.episode_run_time} min`
+									: ''
+							}
+						/>
+						<InfoCard content={`Release date: ${data.release_date}`} />
+						<InfoCard
+							content={`Original language: ${data.original_language}`}
+						/>
+						<InfoCard
+							content={`Genres: ${data.production_countries.map(
+								item => item.name + '. '
+							)}`}
+						/>
+						{data.budget && <InfoCard content={`Budget: ${data.budget}$`} />}
+						{data.homepage.string !== 0 && (
+							<InfoCard content={`Homepage: `}>
+								<a href={data.homepage} className={styles.link} target="_blank">
+									{data.homepage}
+								</a>
+							</InfoCard>
 						)}
 					</div>
-				</div>
-			</section>
-			{pageTypeForAPI.current === 'movie' || pageTypeForAPI.current === 'tv' ? (
+				)}
+
+				{(pageTypeForAPI.current === 'movie' ||
+					pageTypeForAPI.current === 'tv') && (
+					<p className={styles.overview}>Overview: {data.overview}</p>
+				)}
+
+				{pageTypeForAPI.current === 'person' && (
+					<div className={styles.info}>
+						<InfoCard content={`Birthday: ${data.birthday}`} />
+						{data.deathday && (
+							<InfoCard content={`Deathday: ${data.deathday}`} />
+						)}
+						<InfoCard
+							content={`Known for department: ${data.known_for_department}`}
+						/>
+						<InfoCard content={`Popularity: ${data.popularity}`} />
+						<InfoCard content={`Place of birthday: ${data.place_of_birth}`} />
+
+						<p className={styles.overview}>Biography: {data.biography}</p>
+					</div>
+				)}
+			</div>
+
+			{(pageTypeForAPI.current === 'movie' ||
+				pageTypeForAPI.current === 'tv') && (
 				<section className={styles.companies}>
 					{data.production_companies.map(item => {
-						return (
-							<div className={styles.companiesCard}>
-								{item.logo_path ? (
-									<img
-										src={`https://image.tmdb.org/t/p/w500${item.logo_path}`}
-										alt=""
-										className={styles.companiesPoster}
-									/>
-								) : (
-									<div className={styles.withoutPoster}>Logo not found</div>
-								)}
-
-								<p className={styles.companiesName}>{item.name}</p>
-							</div>
-						)
+						return <CompanyCard name={item.name} logo_path={item.logo_path} />
 					})}
 				</section>
-			) : (
-				''
 			)}
 		</div>
 	)
