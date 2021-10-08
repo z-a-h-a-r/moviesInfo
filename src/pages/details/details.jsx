@@ -18,6 +18,7 @@ import InfoCard from '../content/infoCard/infoCard'
 const Details = props => {
 	const history = useHistory()
 	const dispatch = useDispatch()
+	const posterRef = useRef(null)
 	let parsedUrl = queryString.parse(history.location.search.substr(1))
 	let pageTypeForAPI = useRef()
 
@@ -32,7 +33,7 @@ const Details = props => {
 		} else if (parsedUrl.type === 'people') {
 			pageTypeForAPI.current = 'person'
 		}
-
+		posterRef.current.scrollIntoView()
 		dispatch(getDetails(pageTypeForAPI.current, parsedUrl.id))
 	}, [])
 
@@ -58,6 +59,7 @@ const Details = props => {
 				}`}
 				alt=""
 				className={styles.poster}
+				ref={posterRef}
 			/>
 
 			<div>
@@ -76,7 +78,7 @@ const Details = props => {
 					pageTypeForAPI.current === 'tv') && (
 					<div className={styles.info}>
 						<InfoCard
-							content={`Genres: ${data.genres.map(item => item.name + '. ')}`}
+							content={`Genres: ${data.genres.map(item => item.name)}`}
 						/>
 						<InfoCard content={`Vote average: ${data.vote_average}`} />
 						<InfoCard content={`Status: ${data.status}`} />
@@ -94,12 +96,12 @@ const Details = props => {
 							content={`Original language: ${data.original_language}`}
 						/>
 						<InfoCard
-							content={`Genres: ${data.production_countries.map(
-								item => item.name + '. '
+							content={`Production countries: ${data.production_countries.map(
+								item => item.name
 							)}`}
 						/>
-						{data.budget && <InfoCard content={`Budget: ${data.budget}$`} />}
-						{data.homepage.string !== 0 && (
+						{!!data.budget && <InfoCard content={`Budget: ${data.budget}$`} />}
+						{data.homepage && data.homepage.string !== 0 && (
 							<InfoCard content={`Homepage: `}>
 								<a href={data.homepage} className={styles.link} target="_blank">
 									{data.homepage}

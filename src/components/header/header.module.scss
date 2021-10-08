@@ -1,6 +1,10 @@
 .header {
 	height: 70px;
 	background: #161616;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 
 	.inner {
 		height: 70px;
@@ -21,14 +25,27 @@
 	}
 
 	.link {
-		color: rgb(255, 255, 255);
+		color: #fff;
+		cursor: pointer;
+		&:hover {
+			color: rgb(184, 184, 184);
+		}
 	}
+
 	@media (max-width: 500px) {
 		.menu {
 			width: 100%;
 			padding: 0;
 		}
 	}
-	@media (max-width: 992px) {
+	@media (min-width: 500px) {
+		.menu :nth-child(4) {
+			display: none;
+		}
+	}
+}
+@media (max-width: 500px) {
+	.link {
+		font-size: 13px;
 	}
 }

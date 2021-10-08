@@ -17,13 +17,16 @@ const Header = () => {
 					<Logo displayNone={true} />
 
 					<ul className={styles.menu}>
-						<NavLink to={'/movies'} className="link">
+						<NavLink to={'/'} className={styles.link}>
+							main
+						</NavLink>
+						<NavLink to={'/movies'} className={styles.link}>
 							movies
 						</NavLink>
-						<NavLink to={'/tvShows'} className="link">
+						<NavLink to={'/tvShows'} className={styles.link}>
 							tv shows
 						</NavLink>
-						<NavLink to={'/people'} className="link">
+						<NavLink to={'/people'} className={styles.link}>
 							people
 						</NavLink>
 					</ul>

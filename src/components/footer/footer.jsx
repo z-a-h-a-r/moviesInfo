@@ -17,7 +17,7 @@ const Footer = () => {
 						<ul>
 							<li>
 								<a
-									href="https://github.com/z-a-h-a-r/weatherSite"
+									href="https://github.com/z-a-h-a-r/moviesInfo"
 									className="link"
 									target="_blank"
 								>

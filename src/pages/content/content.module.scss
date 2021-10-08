@@ -1,13 +1,12 @@
 .body {
+	margin-top: 120px;
 	.search {
 		font-size: 16px;
 		color: rgb(53, 53, 53);
-		margin-top: 30px;
 	}
 	.title {
 		font-size: 40px;
 		font-weight: 600;
-		margin-top: 50px;
 		margin-bottom: 15px;
 	}
 
@@ -17,7 +16,6 @@
 		display: grid;
 		column-gap: 10px;
 		grid-template-columns: repeat(6, minmax(100px, 1fr));
-
 		@media (max-width: 330px) {
 			grid-template-columns: repeat(2, 1fr);
 		}
@@ -62,7 +60,7 @@
 		background: #161616;
 		border-radius: 6px;
 
-		@media (max-width: 330px) {
+		@media (max-width: 768px) {
 			margin: 0 auto;
 		}
 	}
