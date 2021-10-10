@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 const Card = props => {
 	// JSX
 	return (
-		<NavLink to={`/details?type=${props.type}&id=${props.id}`}>
+		<NavLink to={`/details/?type=${props.type}&id=${props.id}`}>
 			<div className={styles.body}>
 				{props.imgUrl ? (
 					<img

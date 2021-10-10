@@ -21,7 +21,6 @@ const Content = props => {
 	let parsedUrl = queryString.parse(history.location.search.substr(1))
 	let pageCounter = useRef(1)
 	let pageTypeForAPI = useRef()
-
 	// ====================================================
 	// state
 
@@ -48,16 +47,15 @@ const Content = props => {
 	// Side Effects
 
 	useEffect(() => {
-		if (!searchData.results && parsedUrl.query && parsedUrl.query.length) {
-			dispatch(search(null, parsedUrl.query, props.contentType))
-		}
-
 		if (props.contentType === 'movies') {
 			pageTypeForAPI.current = 'movie'
 		} else if (props.contentType === 'tvShows') {
 			pageTypeForAPI.current = 'tv'
 		} else if (props.contentType === 'people') {
 			pageTypeForAPI.current = 'person'
+		}
+		if (!searchData.results && parsedUrl.query && parsedUrl.query.length > 0) {
+			dispatch(search(null, parsedUrl.query, pageTypeForAPI.current))
 		}
 	}, [])
 	useEffect(() => {
