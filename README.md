@@ -1,9 +1,10 @@
 # Movies Info
 
-This is application developed on react & redux.  
-Url address: https://z-a-h-a-r.github.io/moviesInfo/#/
+> In this application you can find any actor or any movie and get detailed information about him
+> This is application developed on react & redux.  
+> Url address: https://z-a-h-a-r.github.io/moviesInfo/#/
 
-## *API's*
+## *API*
 * <a href="https://www.themoviedb.org/settings/api" target="_blank">The Movie Db API</a>
 
 ## *Technologies*
