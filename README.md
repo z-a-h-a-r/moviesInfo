@@ -20,7 +20,7 @@ Url address: https://z-a-h-a-r.github.io/moviesInfo/#/
 ![Main page](https://i.ibb.co/PYgrNvy/1.png)
 
 ### *Content page*
-![Main page](https://i.ibb.co/x1d3882/2.png)
+![Main page](https://i.ibb.co/s95KnTg/2.png)
 
 ### *Details page*
 ![Main page](https://i.ibb.co/x1d3882/3.png)
