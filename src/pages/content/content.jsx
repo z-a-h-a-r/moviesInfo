@@ -1,16 +1,15 @@
 // ====================================================
 // IMPORTS
 import styles from './content.module.scss'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
+import { NavLink } from 'react-router-dom'
+import { getPopular, search } from '../../reducers/dataReducer'
+import * as queryString from 'querystring'
 import Search from '../../components/search/search'
 import NoSearchData from '../../components/noSearchData/noSearchData'
-import { useDispatch, useSelector } from 'react-redux'
-import { search } from '../../reducers/getDataFromAPIReducer'
 import Card from '../../components/card/card'
-import { NavLink } from 'react-router-dom'
-import { useHistory } from 'react-router'
-import * as queryString from 'querystring'
-import { getPopular } from '../../reducers/getDataFromAPIReducer'
 
 // ====================================================
 // Component
@@ -21,25 +20,26 @@ const Content = props => {
 	let parsedUrl = queryString.parse(history.location.search.substr(1))
 	let pageCounter = useRef(1)
 	let pageTypeForAPI = useRef()
+
 	// ====================================================
 	// state
 
 	let trendingData = useSelector(state => {
 		if (props.contentType === 'movies') {
-			return state.dataFromAPI.moviesPageCurrentData.trending
+			return state.data.moviesPageCurrentData.trending
 		} else if (props.contentType === 'tvShows') {
-			return state.dataFromAPI.tvShowsPageCurrentData.trending
+			return state.data.tvShowsPageCurrentData.trending
 		} else if (props.contentType === 'people') {
-			return state.dataFromAPI.peoplePageCurrentData.trending
+			return state.data.peoplePageCurrentData.trending
 		}
 	})
 	let searchData = useSelector(state => {
 		if (props.contentType === 'movies') {
-			return state.dataFromAPI.moviesPageCurrentData.search
+			return state.data.moviesPageCurrentData.search
 		} else if (props.contentType === 'tvShows') {
-			return state.dataFromAPI.tvShowsPageCurrentData.search
+			return state.data.tvShowsPageCurrentData.search
 		} else if (props.contentType === 'people') {
-			return state.dataFromAPI.peoplePageCurrentData.search
+			return state.data.peoplePageCurrentData.search
 		}
 	})
 
@@ -58,6 +58,7 @@ const Content = props => {
 			dispatch(search(null, parsedUrl.query, pageTypeForAPI.current))
 		}
 	}, [])
+
 	useEffect(() => {
 		pageCounter.current = 1
 
@@ -208,4 +209,4 @@ const Content = props => {
 // ====================================================
 // Exports
 
-export default Content
+export default React.memo(Content)

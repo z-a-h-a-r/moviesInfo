@@ -3,15 +3,15 @@
 // Main
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import appReducer from '../reducers/appReducer'
-import getDataFromAPIReducer from '../reducers/getDataFromAPIReducer'
+import appReducer from './reducers/appReducer'
+import dataReducer from './reducers/dataReducer'
 
 // ====================================================
 // CombineReducers
 
 let reducers = combineReducers({
 	app: appReducer,
-	dataFromAPI: getDataFromAPIReducer,
+	data: dataReducer,
 })
 
 // ====================================================
@@ -20,8 +20,8 @@ let reducers = combineReducers({
 let store = createStore(
 	reducers,
 	compose(
-		applyMiddleware(thunk)
-		// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		applyMiddleware(thunk),
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	)
 )
 

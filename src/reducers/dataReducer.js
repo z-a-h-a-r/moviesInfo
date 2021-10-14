@@ -1,7 +1,5 @@
 // ====================================================
 // IMPORTS
-// Main
-
 import { API } from '../api/api'
 
 // ====================================================
@@ -10,7 +8,6 @@ import { API } from '../api/api'
 const SET_SERACH_DATA = 'SET_SERACH_DATA'
 const SET_TRENDING_DATA = 'SET_TRENDING_DATA'
 const SET_DETAILS_DATA = 'SET_DETAILS_DATA'
-const CLEAN_DETAILS_DATA = 'CLEAN_DETAILS_DATA'
 
 // ====================================================
 // Initial state
@@ -29,7 +26,7 @@ let initialState = {
 // ====================================================
 // Reducer
 
-const getDataFromAPIReducer = (state = initialState, action) => {
+const dataReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_SERACH_DATA: {
 			if (action.payload.type === 'movie') {
@@ -191,12 +188,6 @@ const getDataFromAPIReducer = (state = initialState, action) => {
 				detailsPageCurrentData: action.payload,
 			}
 		}
-		case CLEAN_DETAILS_DATA: {
-			return {
-				...state,
-				detailsPageCurrentData: {},
-			}
-		}
 
 		default:
 			return state
@@ -216,10 +207,6 @@ export const getTrendingSuccess = payload => ({
 })
 export const getDetailsSuccess = payload => ({
 	type: SET_DETAILS_DATA,
-	payload,
-})
-export const cleanDetailsPage = payload => ({
-	type: CLEAN_DETAILS_DATA,
 	payload,
 })
 
@@ -257,4 +244,4 @@ export const getDetails = (type, id) => {
 // ====================================================
 // Exports
 
-export default getDataFromAPIReducer
+export default dataReducer

@@ -1,12 +1,12 @@
 // ====================================================
 // IMPORTS
+import React from 'react'
 import styles from './companyCard.module.scss'
 
 // ====================================================
 // Component
 
 const CompanyCard = props => {
-	// ====================================================
 	// JSX
 
 	return (
@@ -29,4 +29,4 @@ const CompanyCard = props => {
 // ====================================================
 // Exports
 
-export default CompanyCard
+export default React.memo(CompanyCard)

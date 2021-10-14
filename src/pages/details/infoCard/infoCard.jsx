@@ -1,14 +1,13 @@
 // ====================================================
 // IMPORTS
+import React from 'react'
 import styles from './infoCard.module.scss'
 
 // ====================================================
 // Component
 
 const InfoCard = props => {
-	// ====================================================
 	// JSX
-
 	return (
 		<div className={styles.body}>
 			<div className={styles.content}>
@@ -21,4 +20,4 @@ const InfoCard = props => {
 // ====================================================
 // Exports
 
-export default InfoCard
+export default React.memo(InfoCard)

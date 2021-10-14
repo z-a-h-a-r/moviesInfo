@@ -3,14 +3,12 @@
 import './styles/zeroing.scss'
 import './styles/style.scss'
 import './styles/commonStyles.scss'
-import Loading from './components/loading/loading'
 import { Route } from 'react-router-dom'
-import { Redirect, Switch, useHistory } from 'react-router'
+import { Switch } from 'react-router'
 import React, { useEffect } from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initializeApp } from './reducers/appReducer'
+import Loading from './components/loading/loading'
 import Header from './components/header/header'
 import Footer from './components/footer/footer'
 import Content from './pages/content/content'
@@ -21,8 +19,12 @@ import Main from './pages/main/main'
 // Component
 
 const App = props => {
-	// Variables
 	const dispatch = useDispatch()
+
+	// ====================================================
+	// state
+
+	const initialized = useSelector(state => state.app.initialized)
 
 	// ====================================================
 	// Side effects
@@ -33,7 +35,8 @@ const App = props => {
 
 	// ====================================================
 	// JSX
-	return !props.initialized ? (
+
+	return !initialized ? (
 		<Loading />
 	) : (
 		<div className="body">
@@ -64,5 +67,4 @@ const App = props => {
 // ====================================================
 // Exports
 
-let mapStateToProps = state => ({ initialized: state.app.initialized })
-export default React.memo(compose(connect(mapStateToProps, {}))(App))
+export default React.memo(App)

@@ -1,8 +1,8 @@
 // ====================================================
 // IMPORTS
+import styles from './main.module.scss'
 import React from 'react'
 import NoSearchData from '../../components/noSearchData/noSearchData'
-import styles from './main.module.scss'
 import Card from './card/card'
 
 // ====================================================

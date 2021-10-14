@@ -1,9 +1,11 @@
 .body {
 	margin-top: 120px;
+
 	.search {
 		font-size: 16px;
 		color: rgb(53, 53, 53);
 	}
+
 	.title {
 		font-size: 40px;
 		font-weight: 600;
@@ -16,13 +18,16 @@
 		display: grid;
 		column-gap: 10px;
 		grid-template-columns: repeat(6, minmax(100px, 1fr));
+
 		@media (max-width: 330px) {
 			grid-template-columns: repeat(2, 1fr);
 		}
+
 		@media (max-width: 768px) {
 			grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 		}
 	}
+
 	.bar {
 		display: grid;
 		grid-template-columns: 20fr 1fr 6fr;
@@ -52,6 +57,7 @@
 			}
 		}
 	}
+
 	.getMoreDataButton {
 		margin-top: 50px;
 		display: block;

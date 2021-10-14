@@ -1,8 +1,6 @@
 // ====================================================
 // IMPORTS
-// Main
-
-import { getDetails, getPopular, getTrending } from './getDataFromAPIReducer'
+import { getPopular } from './dataReducer'
 
 // ====================================================
 // Types
@@ -26,6 +24,7 @@ const appReducer = (state = initialState, action) => {
 				...state,
 				initialized: true,
 			}
+
 		default:
 			return state
 	}

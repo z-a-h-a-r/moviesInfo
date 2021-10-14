@@ -3,12 +3,9 @@
 import styles from './details.module.scss'
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-	cleanDetailsPage,
-	getDetails,
-} from '../../reducers/getDataFromAPIReducer'
-import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
+import * as queryString from 'querystring'
+import { getDetails } from '../../reducers/dataReducer'
 import CompanyCard from './companyCard/companyCard'
 import InfoCard from './infoCard/infoCard'
 
@@ -40,16 +37,10 @@ const Details = props => {
 	// ====================================================
 	// state
 
-	let data = useSelector(state => state.dataFromAPI.detailsPageCurrentData)
+	let data = useSelector(state => state.data.detailsPageCurrentData)
 
 	// ====================================================
 	// JSX
-
-	let searchData = useSelector(
-		state => state.dataFromAPI.detailsPageCurrentData
-	)
-
-	// ====================================================
 
 	return (
 		<>

@@ -14,13 +14,13 @@ const NoSearchData = props => {
 	// state
 
 	const moviesTrending = useSelector(
-		state => state.dataFromAPI.moviesPageCurrentData.trending.results
+		state => state.data.moviesPageCurrentData.trending.results
 	)
 	const peopleTrending = useSelector(
-		state => state.dataFromAPI.peoplePageCurrentData.trending.results
+		state => state.data.peoplePageCurrentData.trending.results
 	)
 	const tvShowsTrending = useSelector(
-		state => state.dataFromAPI.tvShowsPageCurrentData.trending.results
+		state => state.data.tvShowsPageCurrentData.trending.results
 	)
 
 	// ====================================================

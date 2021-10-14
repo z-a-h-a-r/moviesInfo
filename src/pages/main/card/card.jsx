@@ -9,19 +9,20 @@ import { useSelector } from 'react-redux'
 // Component
 
 const Card = props => {
+	// ====================================================
+	// State
+
 	let bg_path = useSelector(state => {
 		if (props.forUrl === 'movies') {
-			return state.dataFromAPI.moviesPageCurrentData.trending.results[0]
-				.backdrop_path
+			return state.data.moviesPageCurrentData.trending.results[0].backdrop_path
 		} else if (props.forUrl === 'people') {
-			return state.dataFromAPI.peoplePageCurrentData.trending.results[0]
-				.profile_path
+			return state.data.peoplePageCurrentData.trending.results[0].profile_path
 		} else if (props.forUrl === 'tvShows') {
-			return state.dataFromAPI.tvShowsPageCurrentData.trending.results[0]
-				.backdrop_path
+			return state.data.tvShowsPageCurrentData.trending.results[0].backdrop_path
 		}
 	})
 
+	// ====================================================
 	// JSX
 	return (
 		<NavLink to={`/${props.forUrl}/`}>
