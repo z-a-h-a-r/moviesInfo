@@ -4,7 +4,7 @@
 > Url address: https://z-a-h-a-r.github.io/moviesInfo/#/
 
 ## *API*
-* <a href="https://www.themoviedb.org/settings/api" target="_blank">The Movie Db API</a>
+* <a href="https://www.themoviedb.org/settings/api" target="_blank">The Movie DB API</a>
 
 ## *Technologies*
 * react
