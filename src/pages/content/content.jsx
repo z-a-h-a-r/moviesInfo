@@ -60,17 +60,16 @@ const Content = props => {
 	}, [])
 
 	useEffect(() => {
-		pageCounter.current = 1
-
 		if (history.location.pathname === `/${props.contentType}/popular`) {
 			dispatch(getPopular(pageTypeForAPI.current, 1))
 		}
+		pageCounter.current = 1
 	}, [parsedUrl.query || window.location.pathname])
 
 	// ====================================================
 	// Functions
 
-	const callback = query => {
+	const searchCallback = query => {
 		if (query.query || 0 === !query.query.length) {
 			new Promise((resolve, reject) => {
 				dispatch(search(resolve, query.query, pageTypeForAPI.current))
@@ -115,10 +114,13 @@ const Content = props => {
 		<div className={styles.body}>
 			<h1 className={styles.title}>{props.contentType}</h1>
 			<div className={styles.bar}>
-				<Search type={props.contentType} callback={callback} />
+				<Search type={props.contentType} callback={searchCallback} />
 				<div></div>
 				<NavLink
 					to={`/${props.contentType}/popular`}
+					onClick={() => {
+						dispatch(getPopular(pageTypeForAPI.current, 1))
+					}}
 					className={styles.popularButton}
 				>
 					Popular {props.contentType}
